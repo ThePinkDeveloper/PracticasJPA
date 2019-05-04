@@ -4,10 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
-import com.thepinkdev.modelo.Alumno;
-import com.thepinkdev.modelo.Curso;
 
 public class Principal_07_JPQL {
     
