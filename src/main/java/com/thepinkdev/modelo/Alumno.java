@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -20,7 +21,18 @@ public class Alumno implements Serializable{
 	private String nombre;
 	private String apellidos;
 	private Integer edad;
-	@OneToMany(mappedBy="alumno")
+	
+	/* Cascade Persist, Remove, orphanRemoval
+	@OneToMany(mappedBy="alumno", 
+			   cascade={CascadeType.PERSIST,
+			            CascadeType.REMOVE},
+			   orphanRemoval=true)
+	private List<Curso> cursos = new ArrayList<Curso>();
+	*/
+	
+	/* Solo Cascade Persist */
+	@OneToMany(mappedBy="alumno", 
+			   cascade={CascadeType.PERSIST})
 	private List<Curso> cursos = new ArrayList<Curso>();
 	
 	// Constructores
@@ -77,6 +89,16 @@ public class Alumno implements Serializable{
 
 	public void setCursos(List<Curso> cursos) {
 		this.cursos = cursos;
+	}
+	
+	public void add(Curso c) {
+		cursos.add(c);
+		c.setAlumno(this);	
+	}
+	
+	public void remove(Curso c) {
+		cursos.remove(c);
+		c.setAlumno(null);	
 	}
 
 	@Override

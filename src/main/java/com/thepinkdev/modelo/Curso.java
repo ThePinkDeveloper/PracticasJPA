@@ -81,7 +81,9 @@ public class Curso implements Serializable{
 
 	public void setAlumno(Alumno alumno) {
 		this.alumno = alumno;
-		alumno.getCursos().add(this);
+		if (alumno != null) {
+			alumno.getCursos().add(this);
+		}
 	}
 	
 	
